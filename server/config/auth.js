@@ -65,14 +65,16 @@ module.exports = {
   | via HTTP `Authorization` header.
   |
   */
+ //JWT Authentication object
   jwt: {
     serializer: 'lucid',
     model: 'App/Models/User',
     scheme: 'jwt',
     uid: 'email',
     password: 'password',
+    //Checks if entered email, password is correct or not. If yes, it then generates a new jwt key when user logs in.
     options: {
-      secret: Env.get('APP_KEY')
+      secret: Env.get('APP_KEY') // Using using secret key here to define new jwt token. 
     }
   },
 

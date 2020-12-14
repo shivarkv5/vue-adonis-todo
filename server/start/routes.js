@@ -19,3 +19,14 @@ const Route = use('Route')
 Route.get('/', () => {
   return { greeting: 'Hello world in JSON' }
 })
+
+Route.group(() => {
+  Route.post('/auth/register', 'UserController.register')
+  Route.post('/auth/login', 'UserController.login')
+
+  Route.get('/projects', 'ProjectController.index').middleware('auth')
+  Route.post('/create', 'ProjectController.create').middleware('auth')
+  Route.delete('/delete/:id', 'ProjectController.destroy').middleware('auth')
+
+}).prefix('api')
+

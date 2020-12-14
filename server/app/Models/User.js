@@ -34,6 +34,14 @@ class User extends Model {
   tokens () {
     return this.hasMany('App/Models/Token')
   }
+
+//Declaring association between user and project
+  projects (){
+    // User can have many projects. 
+    // This tells lucid how to lookup particular associated record using projects method
+    return this.hasMany('App/Models/Project')
+  }
+  // User.projects() ==> fetches all projefcts associated with that user
 }
 
 module.exports = User
