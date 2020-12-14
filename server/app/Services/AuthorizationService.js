@@ -10,11 +10,11 @@ class AuthorizationService {
     verifyPermission(project, user) {
 
         if (!project) {
-            throw  ResourceNotFoundException();
+            throw new ResourceNotFoundException();
         }
 
         if (user.id !== project.user_id) {
-            throw  InvalidAccessException();
+            throw new InvalidAccessException();
         }
     }
 }

@@ -24,17 +24,25 @@ class ProjectController {
 
     async destroy({ request, auth, params }) {
         const user = await auth.getUser();
-        // console.log(user);
         const { id } = params
-
         const project = await Project.find(id ) // Finding an project from Project Model
-
-        // console.log(project);
-
         AuthorizationService.verifyPermission(project,user)
         await project.delete();
         return project;
     }
+
+    async update ({request, auth, params}){
+        const user = await auth.getUser();
+        const { id } = params
+        const {title} =  request.all();
+        const project = await Project.find(id);
+        AuthorizationService.verifyPermission(project,user)
+        project.merge({title});
+        await user.projects().save(project);
+        return project;
+    }
+
+
 }
 
 
